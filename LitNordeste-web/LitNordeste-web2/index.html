@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LitNordeste — Dashboard literário interativo sobre a escritora Socorro Acioli, sua trajetória e obras." />
+    <title>LitNordeste — Socorro Acioli</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    />
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+<div class="app-wrapper">
+
+    <aside class="sidebar d-none d-lg-flex" role="navigation" aria-label="Menu principal">
+
+        <div class="sidebar-logo">
+            <span class="logo-nome">LitNordeste</span>
+            <span class="logo-subtitulo">Dashboard literário</span>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Seções do dashboard">
+            <span class="sidebar-nav-label">Navegação</span>
+
+            <a href="#" class="nav-item-link ativo"
+               data-secao="visao-geral"
+               role="button"
+               aria-label="Ir para Visão Geral">
+                <i class="bi bi-grid-1x2-fill nav-icone" aria-hidden="true"></i>
+                Visão Geral
+            </a>
+
+            <a href="#" class="nav-item-link"
+               data-secao="obras"
+               role="button"
+               aria-label="Ir para Obras">
+                <i class="bi bi-book-fill nav-icone" aria-hidden="true"></i>
+                Obras
+            </a>
+
+            <a href="#" class="nav-item-link"
+               data-secao="novo-livro"
+               role="button"
+               aria-label="Ir para Lançamentos">
+                <i class="bi bi-star-fill nav-icone" aria-hidden="true"></i>
+                Lançamentos
+            </a>
+
+            <a href="#" class="nav-item-link"
+               data-secao="impacto-cultural"
+               role="button"
+               aria-label="Ir para Panorama do Catálogo">
+                <i class="bi bi-globe-americas nav-icone" aria-hidden="true"></i>
+                Panorama do Catálogo
+            </a>
+
+            <a href="#" class="nav-item-link"
+               data-secao="trajetoria"
+               role="button"
+               aria-label="Ir para Trajetória">
+                <i class="bi bi-clock-history nav-icone" aria-hidden="true"></i>
+                Trajetória
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <small>© 2026 LitNordeste</small>
+        </div>
+    </aside>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMobile" aria-labelledby="sidebarMobileLabel">
+        <div class="offcanvas-header">
+            <div>
+                <span class="logo-nome" id="sidebarMobileLabel">LitNordeste</span>
+                <span class="logo-subtitulo">Dashboard literário</span>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav aria-label="Menu mobile">
+                <span class="sidebar-nav-label">Navegação</span>
+                <a href="#" class="nav-item-link" data-secao="visao-geral" role="button">
+                    <i class="bi bi-grid-1x2-fill nav-icone" aria-hidden="true"></i> Visão Geral
+                </a>
+                <a href="#" class="nav-item-link" data-secao="obras" role="button">
+                    <i class="bi bi-book-fill nav-icone" aria-hidden="true"></i> Obras
+                </a>
+                <a href="#" class="nav-item-link" data-secao="novo-livro" role="button">
+                    <i class="bi bi-star-fill nav-icone" aria-hidden="true"></i> Lançamentos
+                </a>
+                <a href="#" class="nav-item-link" data-secao="impacto-cultural" role="button">
+                    <i class="bi bi-globe-americas nav-icone" aria-hidden="true"></i> Panorama do Catálogo
+                </a>
+                <a href="#" class="nav-item-link" data-secao="trajetoria" role="button">
+                    <i class="bi bi-clock-history nav-icone" aria-hidden="true"></i> Trajetória
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="conteudo-principal">
+
+        <header class="header" role="banner">
+
+            <button
+                class="btn-hamburger d-lg-none"
+                id="btnHamburger"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#sidebarMobile"
+                aria-controls="sidebarMobile"
+                aria-label="Abrir menu de navegação">
+                <i class="bi bi-list" aria-hidden="true"></i>
+            </button>
+
+            <h1 class="header-titulo" id="headerTitulo">Visão Geral</h1>
+
+            <div class="header-busca d-none d-md-block" role="search">
+                <i class="bi bi-search icone-busca" aria-hidden="true"></i>
+                <input
+                    type="search"
+                    id="campoBuscaHeader"
+                    placeholder="Buscar obras..."
+                    aria-label="Buscar obras"
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="header-acoes">
+
+                <button
+                    class="btn-header"
+                    id="btnTema"
+                    type="button"
+                    aria-label="Ativar modo escuro"
+                    title="Alternar tema">
+                    <i class="bi bi-moon-fill" id="iconeTema" aria-hidden="true"></i>
+                </button>
+
+                <button
+                    class="btn-header"
+                    type="button"
+                    aria-label="Notificações"
+                    title="Notificações">
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                </button>
+
+                <div class="header-avatar" aria-label="Perfil do usuário" role="img" title="Usuário">
+                    LA
+                </div>
+            </div>
+        </header>
+
+        <main class="conteudo-secoes" id="conteudoPrincipal" role="main">
+
+            <section class="secao-conteudo" id="secao-visao-geral" aria-label="Visão Geral">
+
+                <div class="card autora-intro-card mb-4">
+
+                    <img
+                        src="assets/socorro-acioli.jpg"
+                        alt="Foto da escritora Socorro Acioli"
+                        class="autora-foto"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    />
+
+                    <div class="autora-foto-placeholder" style="display:none;" aria-hidden="true">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="autora-nome">Socorro Acioli</h2>
+                        <p class="autora-profissao">Escritora &amp; Jornalista — Ceará, Brasil</p>
+                        <p class="autora-descricao">
+                            Socorro Acioli é escritora e jornalista cearense, reconhecida por uma
+                            narrativa que entrecruza realismo mágico, fé popular e cultura nordestina.
+                            Vencedora do Prêmio Jabuti com <em>Ela Tem Olhos de Céu</em> (2013), sua obra
+                            destaca-se pela linguagem lírica e pela profundidade com que retrata
+                            personagens e territórios do Nordeste brasileiro.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card card-indicador h-100" aria-label="Obras catalogadas">
+                            <div class="indicador-icone">
+                                <i class="bi bi-book-fill" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="indicador-valor" id="indObrasCatalogadas">5</div>
+                                <div class="indicador-label">Obras catalogadas</div>
+                                <div class="indicador-detalhe">Seleção de cinco títulos</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card card-indicador h-100" aria-label="Prêmios recebidos">
+                            <div class="indicador-icone">
+                                <i class="bi bi-trophy-fill" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="indicador-valor" id="indPremios">1</div>
+                                <div class="indicador-label">Prêmio Jabuti</div>
+                                <div class="indicador-detalhe">Ela Tem Olhos de Céu, 2013</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card card-indicador h-100" aria-label="Categorias no catálogo">
+                            <div class="indicador-icone">
+                                <i class="bi bi-tags-fill" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="indicador-valor" id="indCategorias">2</div>
+                                <div class="indicador-label">Categorias no catálogo</div>
+                                <div class="indicador-detalhe">Nos títulos catalogados</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="card card-indicador h-100" aria-label="Ano de estreia">
+                            <div class="indicador-icone">
+                                <i class="bi bi-calendar-event-fill" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="indicador-valor" id="indDebut">2014</div>
+                                <div class="indicador-label">Estreia no romance</div>
+                                <div class="indicador-detalhe">A Cabeça do Santo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card destaque-card mb-4" aria-label="Destaque: Amar é Inadiável">
+
+                    <div class="destaque-capa-wrapper">
+                        <img
+                            src="assets/amar-e-inadiavel-livro.jpg"
+                            alt="Capa do livro Amar é Inadiável"
+                            class="destaque-capa"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+
+                        <div class="destaque-capa-placeholder" style="display:none;" aria-hidden="true">
+                            <i class="bi bi-book"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="destaque-badge">Novo lançamento</span>
+                        <h3 class="destaque-titulo">Amar é Inadiável</h3>
+                        <div class="destaque-meta">
+                            <span class="destaque-meta-item">
+                                <i class="bi bi-person" aria-hidden="true"></i> Socorro Acioli
+                            </span>
+                            <span class="destaque-meta-item">
+                                <i class="bi bi-calendar3" aria-hidden="true"></i> 2026
+                            </span>
+                            <span class="destaque-meta-item">
+                                <i class="bi bi-bookmark" aria-hidden="true"></i> Crônicas
+                            </span>
+                            <span class="destaque-meta-item">
+                                <i class="bi bi-building" aria-hidden="true"></i> Planeta
+                            </span>
+                        </div>
+                        <p class="destaque-descricao">
+                            Reunião de mais de sessenta crônicas de Socorro Acioli sobre a escrita,
+                            os encontros e o cotidiano.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-12 col-lg-7">
+                        <div class="card card-grafico h-100">
+                            <div class="card-grafico-titulo">
+                                <i class="bi bi-graph-up-arrow" aria-hidden="true"></i>
+                                Evolução da produção
+                            </div>
+                            <div class="grafico-wrapper">
+                                <canvas id="graficoEvolucao"
+                                        aria-label="Gráfico de linha: evolução da produção literária"
+                                        role="img"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-5">
+                        <div class="card card-grafico h-100">
+                            <div class="card-grafico-titulo">
+                                <i class="bi bi-pie-chart-fill" aria-hidden="true"></i>
+                                Distribuição por gênero
+                            </div>
+                            <div class="grafico-wrapper">
+                                <canvas id="graficoCategorias"
+                                        aria-label="Gráfico de rosca: distribuição das obras por gênero"
+                                        role="img"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-5">
+                        <div class="card card-grafico h-100">
+                            <div class="card-grafico-titulo">
+                                <i class="bi bi-bar-chart-horizontal-fill" aria-hidden="true"></i>
+                                Comparativo de obras
+                            </div>
+                            <div class="grafico-wrapper alto">
+                                <canvas id="graficoComparativo"
+                                        aria-label="Gráfico de barras horizontal: comparativo entre obras por páginas"
+                                        role="img"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-7">
+                        <div class="card card-grafico h-100">
+                            <div class="card-grafico-titulo">
+                                <i class="bi bi-bar-chart-fill" aria-hidden="true"></i>
+                                Obras por editora
+                            </div>
+                            <div class="grafico-wrapper alto">
+                                <canvas id="graficoEditoras"
+                                        aria-label="Gráfico de barras vertical: número de obras por editora"
+                                        role="img"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="secao-conteudo" id="secao-obras" aria-label="Catálogo de Obras">
+
+                <h2 class="secao-titulo">Obras de Socorro Acioli</h2>
+
+                <div class="card p-3 mb-4">
+                    <div class="filtros-wrapper">
+
+                        <div class="campo-busca-obras">
+                            <i class="bi bi-search icone-busca" aria-hidden="true"></i>
+                            <input
+                                type="search"
+                                id="campoBusca"
+                                placeholder="Buscar obra, gênero..."
+                                aria-label="Buscar obras"
+                                autocomplete="off"
+                            />
+                        </div>
+
+                        <div class="filtros-grupo" role="group" aria-label="Filtrar por gênero">
+                            <button class="btn-filtro-categoria ativo" data-filtro-categoria="todos">Todos</button>
+                            <button class="btn-filtro-categoria" data-filtro-categoria="Romance">Romance</button>
+                            <button class="btn-filtro-categoria" data-filtro-categoria="Infantojuvenil">Infantojuvenil</button>
+                            <button class="btn-filtro-categoria" data-filtro-categoria="Infantil (cordel)">Infantil (cordel)</button>
+                            <button class="btn-filtro-categoria" data-filtro-categoria="Crônicas">Crônicas</button>
+                        </div>
+
+                        <div>
+                            <label for="filtroAno" class="visually-hidden">Filtrar por ano</label>
+                            <select class="form-select-filtro" id="filtroAno" aria-label="Filtrar por ano">
+                                <option value="todos">Todos os anos</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="filtroEditora" class="visually-hidden">Filtrar por editora</label>
+                            <select class="form-select-filtro" id="filtroEditora" aria-label="Filtrar por editora">
+                                <option value="todos">Todas as editoras</option>
+                            </select>
+                        </div>
+
+                        <span class="text-muted ms-auto" id="contadorResultados" aria-live="polite">5 obras encontradas</span>
+                    </div>
+                </div>
+
+                <div class="row" id="containerObras" aria-label="Lista de obras">
+
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h3 class="card-grafico-titulo mb-3">
+                            <i class="bi bi-table" aria-hidden="true"></i>
+                            Tabela detalhada
+                        </h3>
+                        <div class="tabela-container table-responsive">
+                            <table class="tabela-obras" aria-label="Tabela detalhada das obras">
+                                <thead>
+                                    <tr>
+                                        <th data-ordenar="titulo" scope="col">
+                                            Obra <span class="sort-icon" aria-hidden="true">↕</span>
+                                        </th>
+                                        <th data-ordenar="ano" scope="col">
+                                            Ano <span class="sort-icon" aria-hidden="true">↕</span>
+                                        </th>
+                                        <th data-ordenar="genero" scope="col">
+                                            Gênero <span class="sort-icon" aria-hidden="true">↕</span>
+                                        </th>
+                                        <th data-ordenar="editora" scope="col">
+                                            Editora <span class="sort-icon" aria-hidden="true">↕</span>
+                                        </th>
+                                        <th data-ordenar="paginas" scope="col">
+                                            Páginas <span class="sort-icon" aria-hidden="true">↕</span>
+                                        </th>
+                                        <th scope="col">Fonte</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaObrasBody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="secao-conteudo" id="secao-novo-livro" aria-label="Lançamentos">
+
+                <h2 class="secao-titulo">Lançamentos</h2>
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card p-3 text-center">
+
+                            <div class="capa-lancamento-wrapper mb-3">
+                                <img
+                                    src="assets/amar-e-inadiavel-livro.jpg"
+                                    alt="Capa do livro Amar é Inadiável"
+                                    class="capa-lancamento"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                />
+
+                                <div class="capa-lancamento-placeholder" style="display:none;" aria-hidden="true">
+                                    <i class="bi bi-book"></i>
+                                </div>
+                            </div>
+                            <h3 class="autora-nome fs-5" id="novoLivroTitulo">Amar é Inadiável</h3>
+                            <p class="autora-profissao">Socorro Acioli</p>
+
+                            <ul class="list-unstyled text-start mt-3 small" style="font-size:0.82rem;">
+                                <li class="mb-1">
+                                    <strong>Ano:</strong>
+                                    <span id="novoLivroAno">2026</span>
+                                </li>
+                                <li class="mb-1">
+                                    <strong>Gênero:</strong>
+                                    <span id="novoLivroGenero">Crônicas</span>
+                                </li>
+                                <li class="mb-1">
+                                    <strong>Editora:</strong>
+                                    <span id="novoLivroEditora">Planeta</span>
+                                </li>
+                                <li class="mb-1">
+                                    <strong>Páginas:</strong>
+                                    <span id="novoLivroPaginas">224</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-8 col-lg-9">
+
+                        <div class="card p-4 mb-3">
+                            <h4 class="secao-titulo fs-5">Sobre o livro</h4>
+                            <p id="novoLivroDescricao" class="text-muted" style="line-height: 1.75; font-size: 0.95rem;">
+                                Reunião de mais de sessenta crônicas de Socorro Acioli sobre a escrita,
+                                os encontros e o cotidiano.
+                            </p>
+                        </div>
+
+                        <div class="card p-4">
+                            <h4 class="secao-titulo fs-5">Informações editoriais</h4>
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-4">
+                                    <div class="editorial-item">
+                                        <span class="editorial-rotulo">ISBN</span>
+                                        <span class="editorial-valor" id="novoLivroIsbn">978-85-422-4314-7</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="editorial-item">
+                                        <span class="editorial-rotulo">Formato</span>
+                                        <span class="editorial-valor">Livro físico</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="editorial-item">
+                                        <span class="editorial-rotulo">Fonte</span>
+                                        <a class="editorial-valor" id="novoLivroFonte" href="https://loja.paulus.com.br/amar-e-inadiavel/p" target="_blank" rel="noopener noreferrer">Planeta / Paulus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="secao-conteudo" id="secao-impacto-cultural" aria-label="Panorama do Catálogo">
+
+                <h2 class="secao-titulo">Panorama do Catálogo</h2>
+                <p class="secao-subtitulo">
+                    Soma das páginas das edições físicas catalogadas, agrupadas por tipo de obra.
+                </p>
+
+                <div class="card card-grafico mb-4">
+                    <div class="card-grafico-titulo">
+                        <i class="bi bi-bar-chart-fill" aria-hidden="true"></i>
+                        Páginas por tipo de obra
+                    </div>
+                    <div class="grafico-wrapper alto">
+                        <canvas id="graficoPanorama"
+                                aria-label="Gráfico de barras: total de páginas por tipo de obra"
+                                role="img"></canvas>
+                    </div>
+                    <small class="fonte-tag">Fonte: fichas editoriais de cada obra, listadas em Obras e no README.</small>
+                </div>
+
+            </section>
+
+            <section class="secao-conteudo" id="secao-trajetoria" aria-label="Trajetória de Socorro Acioli">
+
+                <h2 class="secao-titulo">Trajetória Literária</h2>
+                <p class="secao-subtitulo">
+                    Principais marcos da vida e obra de Socorro Acioli.
+                </p>
+
+                <div class="timeline-wrapper" id="containerTrajetoria" role="list" aria-label="Timeline da trajetória">
+
+                </div>
+
+                <div class="card p-3 mt-4">
+                    <div class="card-grafico-titulo mb-2">
+                        <i class="bi bi-circle-fill" aria-hidden="true"></i> Legenda
+                    </div>
+                    <div class="d-flex flex-wrap gap-3 small text-muted">
+                        <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--verde-escuro);vertical-align:middle;" aria-hidden="true"></span> Origem / Trajetória</span>
+                        <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--verde-medio);vertical-align:middle;" aria-hidden="true"></span> Obra publicada</span>
+                        <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#d4a017;vertical-align:middle;" aria-hidden="true"></span> Premiação</span>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="footer" role="contentinfo">
+            <div class="row align-items-start g-3">
+
+                <div class="col-12 col-md-6">
+                    <span class="footer-logo">LitNordeste</span>
+                    <p class="footer-descricao">Dashboard literário sobre Socorro Acioli</p>
+
+                    <div class="footer-fontes">
+                        <strong style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--texto-principal);">Fontes dos dados</strong>
+                        <p class="mt-1 mb-0">
+                            <strong>Informações bibliográficas:</strong> Companhia das Letras, Seguinte, Gaivota e Planeta; fichas e edições no README.<br>
+                            <strong>Premiação:</strong> Prêmio Jabuti 2013, categoria Infantil.<br>
+                            <strong>Dados sobre a autora:</strong> Editora Biruta.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 text-md-end">
+                    <div class="footer-divider d-md-none"></div>
+                    <p class="footer-copy mb-1">
+                        © 2026 LitNordeste. Todos os direitos reservados.
+                    </p>
+                    <p class="footer-devs mb-0">
+                        Desenvolvido por
+                        <strong>@emilly.dev</strong>
+                        e
+                        <strong>@meunomeejohn_bungas</strong>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</div>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+<script src="js/data.js"></script>
+
+<script src="js/charts.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
